@@ -1,62 +1,62 @@
 > 📋A template README.md for code accompanying a Machine Learning paper
 
-# My Paper Title
+A Target Guided Generative Clustering Model for Spatial Object Detection from Weak Annotations
 
-This repository is the official implementation of [My Paper Title](https://arxiv.org/abs/2030.12345). 
+This repository is the official implementation of A Target Guided Generative Clustering Model for Spatial Object Detection from Weak Annotations. 
 
-> 📋Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
 
 ## Requirements
 
 To install requirements:
 
 ```setup
-pip install -r requirements.txt
+sudo nvidia-docker run -t -i -v /folder/:/folder/ -p 8888:8888 spatialcomputing/map_text_recognition_gpu /bin/bash
 ```
 
-> 📋Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc...
-
+> 📋Run above command to set up the environment
 ## Training
 
 To train the model(s) in the paper, run this command:
 
-```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
+```data generation
+python data_gen.py --training_data_folder <path_to_data> --image <path_to_image> --mask <path_to_annotation>
 ```
 
-> 📋Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
+```train
+python train.py --target_samples_folder <path_to_data> --image <path_to_image> --mask <path_to_annotation> --weight 1000
+```
+
+> 📋Use data_gen.py to get 30% data as training data, and the user choose a target sample and put it to the target sample folder.
+> 📋Use train.py to train TOD.
 
 ## Evaluation
 
-To evaluate my model on ImageNet, run:
+To detect target objects, run:
 
 ```eval
-python eval.py --model-file mymodel.pth --benchmark imagenet
+python test.py --model-file mymodel.pth --image <path_to_image>
 ```
 
-> 📋Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
+> 📋Use the trained model to detect objects on the entire annotated area.
 
-## Pre-trained Models
-
-You can download pretrained models here:
-
-- [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
-
-> 📋Give a link to where/how the pretrained models can be downloaded and how they were trained (if applicable).  Alternatively you can have an additional column in your results table with a link to the models.
 
 ## Results
 
-Our model achieves the following performance on :
+Our model achieves the following performance on cars detection in parking lots:
 
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+|       | Parking lot 1      | Parking lot 2      | Parking lot 3      |
+| ------|------------------- |------------------- | -------------------|
+|       |precision | recall  |precision | recall  |precision | recall  |
+| ------|------------------- |------------------- | -------------------|
+| TOD   |95.00%.   | 88.68%  |78.57%.   |92.86%.  |93.20%.    |93.70%. |  
 
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
-| ------------------ |---------------- | -------------- |
-| My awesome model   |     85%         |      95%       |
-
-> 📋Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
 
 
 ## Contributing
+Copyright (c) year copyright holders
 
-> 📋Pick a licence and describe how to contribute to your code repository. 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
