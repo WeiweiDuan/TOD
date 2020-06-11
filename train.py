@@ -1,5 +1,3 @@
-# new implementation, 5 clusters
-
 from keras.layers import Lambda, Input, Dense, Merge, Concatenate,Multiply, Add, add, Activation
 from keras.models import Model
 from keras.datasets import mnist
@@ -42,7 +40,10 @@ def sampling(args):
 
 
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
-TARGET_SAMPLE_DIR = './data/mnist/target_samples'
+MAP_PATH = './data/toronto.png'
+TARGET_SAMPLE_DIR = "./data/target_samples"
+MASK_PATH = './data/parkinglot.png'
+SUBSET_PATH = './data/subset'
 SHIFT_LIST = [-10,-5,0,5,10] #
 ROTATION_ANGLE = []#0,5,10,15,20,340,345,355
 IMG_SIZE = 28
